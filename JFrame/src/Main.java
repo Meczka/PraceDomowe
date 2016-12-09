@@ -235,9 +235,9 @@ public class Main extends JFrame implements ActionListener
 			BigDecimal ile = new BigDecimal(Double.toString(temp));
 			while(teraz<cel)
 			{
+				teraz++;
 				double temp1=(double)1/dlugosc.get(teraz);
 				BigDecimal bc = new BigDecimal(Double.toString(temp1));
-				teraz++;
 				ile = ile.multiply(bc);
 				
 			}
@@ -247,10 +247,12 @@ public class Main extends JFrame implements ActionListener
 		{
 			int ile;
 			ile=dlugosc.get(teraz);
+			teraz--;
 			while(cel<teraz)
 			{
-				teraz--;
+				
 				ile*=dlugosc.get(teraz);
+				teraz--;
 			}
 			return ile;
 		}
@@ -259,9 +261,38 @@ public class Main extends JFrame implements ActionListener
 			return 0;
 		}
 	}
-	public static int masa(int teraz,int cel)
+	public static double masa(int teraz,int cel)
 	{
-		
+		if(teraz<cel)
+		{
+			teraz++;
+			double temp = (double) 1/masa.get(teraz);
+			BigDecimal ile = new BigDecimal(Double.toString(temp));
+			while(teraz<cel)
+			{
+				teraz++;
+				double temp1=(double) 1/masa.get(teraz);
+				BigDecimal bc = new BigDecimal(Double.toString(temp1));
+				ile= ile.multiply(bc);
+			}
+			return ile.doubleValue();
+		}
+		else if(cel<teraz)
+		{
+			int ile;
+			ile=masa.get(teraz);
+			teraz--;
+			while(cel<teraz)
+			{
+				ile*=masa.get(teraz);
+				teraz--;
+			}
+			return ile;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 }
 class ObliczMase extends JDialog implements ActionListener
@@ -323,7 +354,8 @@ class ObliczMase extends JDialog implements ActionListener
 		{
 			String leftChoose = left.getSelectedItem().toString();
 			String rightChoose = right.getSelectedItem().toString();
-			System.out.println(Main.dlugosc(Main.extractDlugoscToInt(leftChoose), 3));
+			System.out.println(Main.dlugosc(Main.extractDlugoscToInt(leftChoose), 1));
+			System.out.println(Main.masa(Main.extractMasaToInt(leftChoose), 2));
 			double leftText=0,rightText = 0;
 			try
 			{
