@@ -226,6 +226,21 @@ public class Main extends JFrame implements ActionListener
 		}
 		
 	}
+	public static int extractDlugoscToIntFromObjetosc(String objetosc)
+	{
+		String temp = objetosc.substring(0, 1);
+		switch (temp)
+		{
+		case "c":
+			return 1;
+		case "d":
+			return 2;
+		case "m":
+			return 3;
+		default:
+			return 0;	
+		}
+	}
 	public static double dlugosc(int teraz,int cel)
 	{
 		if(teraz<cel)
@@ -241,7 +256,7 @@ public class Main extends JFrame implements ActionListener
 				ile = ile.multiply(bc);
 				
 			}
-			return ile.doubleValue();
+			return Double.parseDouble(ile.toString());
 		}
 		else if(cel<teraz)
 		{
@@ -258,7 +273,7 @@ public class Main extends JFrame implements ActionListener
 		}
 		else
 		{
-			return 0;
+			return 1;
 		}
 	}
 	public static double masa(int teraz,int cel)
@@ -267,6 +282,7 @@ public class Main extends JFrame implements ActionListener
 		{
 			teraz++;
 			double temp = (double) 1/masa.get(teraz);
+			
 			BigDecimal ile = new BigDecimal(Double.toString(temp));
 			while(teraz<cel)
 			{
@@ -291,13 +307,26 @@ public class Main extends JFrame implements ActionListener
 		}
 		else
 		{
+			return 1;
+		}
+	}
+	public static int exportMasaToIntFromMasa(String masa)
+	{
+		masa = masa.substring(0,1);
+		switch(masa)
+		{
+		case "g":
+			return 1;
+		case "k":
+			return 2;
+		default:
 			return 0;
 		}
 	}
 }
 class ObliczMase extends JDialog implements ActionListener
 {
-	private JComboBox left,right;
+	private JComboBox left,right,output;
 	private JLabel leftL,rightL;
 	private JTextArea leftT,rightT;
 	private JButton jb;
@@ -318,6 +347,8 @@ class ObliczMase extends JDialog implements ActionListener
 		rightT = new JTextArea();
 		rightL =  new JLabel("Objetoœæ:");
 		
+		output = new JComboBox();
+		
 		jb.setBounds(200,100,70,20);
 		
 		leftL.setBounds(20,50,70,20);
@@ -327,6 +358,9 @@ class ObliczMase extends JDialog implements ActionListener
 		left.addItem("g/cm3");
 		left.addItem("g/dm3");
 		
+		output.setBounds(100,100,70,20);
+		output.addItem("kg");
+		output.addItem("g");
 		
 		rightL.setBounds(255, 50, 70, 20);
 		rightT.setBounds(325,50,70,20);
@@ -341,7 +375,7 @@ class ObliczMase extends JDialog implements ActionListener
 		add(right);
 		add(rightL);
 		add(rightT);
-		
+		add(output);
 		add(jb);
 		
 		jb.addActionListener(this);
@@ -354,27 +388,32 @@ class ObliczMase extends JDialog implements ActionListener
 		{
 			String leftChoose = left.getSelectedItem().toString();
 			String rightChoose = right.getSelectedItem().toString();
-			System.out.println(Main.dlugosc(Main.extractDlugoscToInt(leftChoose), 1));
-			System.out.println(Main.masa(Main.extractMasaToInt(leftChoose), 2));
-			double leftText=0,rightText = 0;
-			try
-			{
-				
-				leftText = Double.parseDouble(leftT.getText());
-				rightText = Double.parseDouble(rightT.getText());
-			}catch(Exception e1)
-			{
-				
-			}
-			if(leftChoose.equals("kg/m3"))
-			{
-				if(rightChoose=="cm3")
-				{
-					rightText/=1000;
-					double wynik = rightText*leftText;
-					System.out.println(wynik);
-				}
-			}
+			String outputChoose = output.getSelectedItem().toString();
+			//System.out.println(Main.dlugosc(Main.extractDlugoscToInt(leftChoose), 1));
+			//System.out.println(Main.masa(Main.extractMasaToInt(leftChoose), 2));
+			double a,b;
+			
+			
+			a=Main.dlugosc(Main.extractDlugoscToInt(leftChoose), Main.extractDlugoscToIntFromObjetosc(rightChoose));
+			BigDecimal powtemp = new BigDecimal(Double.toString(a));
+			powtemp=powtemp.pow(3);
+			a=powtemp.doubleValue();
+			b=Main.masa(Main.extractMasaToInt(leftChoose), Main.exportMasaToIntFromMasa(outputChoose));
+			double d = a/b;
+			System.out.println(a);
+			System.out.println(b);
+			System.out.println(d);
+			
+			
+			System.out.println("------------------------");
+			
+			double a1 = Main.dlugosc(Main.extractDlugoscToIntFromObjetosc(rightChoose),1);
+			BigDecimal powtemp1 = new BigDecimal(Double.toString(a1));
+			powtemp1 = powtemp1.pow(3);
+			a1=powtemp1.doubleValue();
+			System.out.println(a1);
+			
+			
 		}
 		
 	}
