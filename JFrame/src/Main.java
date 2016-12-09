@@ -386,6 +386,12 @@ class ObliczMase extends JDialog implements ActionListener
 		Object z = e.getSource();
 		if(z==jb)
 		{
+			
+			BigDecimal leftText = null,rightText = null;
+			try{
+			leftText = new BigDecimal(leftT.getText());
+			rightText = new BigDecimal(rightT.getText());
+			}catch(Exception ex){}
 			String leftChoose = left.getSelectedItem().toString();
 			String rightChoose = right.getSelectedItem().toString();
 			String outputChoose = output.getSelectedItem().toString();
@@ -405,13 +411,22 @@ class ObliczMase extends JDialog implements ActionListener
 			System.out.println(d);
 			
 			
-			System.out.println("------------------------");
+			BigDecimal divideTemp = new BigDecimal(Double.toString(d));
+			leftText = leftText.divide(divideTemp);
 			
-			double a1 = Main.dlugosc(Main.extractDlugoscToIntFromObjetosc(rightChoose),1);
+			BigDecimal wynik = leftText.multiply(rightText);
+			System.out.println(wynik.doubleValue());
+			
+			
+			
+			
+			//System.out.println("------------------------");
+			
+			/*double a1 = Main.dlugosc(Main.extractDlugoscToIntFromObjetosc(rightChoose),1);
 			BigDecimal powtemp1 = new BigDecimal(Double.toString(a1));
 			powtemp1 = powtemp1.pow(3);
 			a1=powtemp1.doubleValue();
-			System.out.println(a1);
+			System.out.println(a1);*/
 			
 			
 		}
