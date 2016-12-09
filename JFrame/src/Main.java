@@ -3,6 +3,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -20,13 +22,24 @@ import javax.swing.JTextArea;
 
 public class Main extends JFrame implements ActionListener
 {
+	private static HashMap<Integer,Integer> masa = new HashMap<Integer,Integer>();
+	private static HashMap<Integer,Integer> dlugosc = new HashMap<Integer,Integer>();
 	JMenuBar menuBar;
 	JMenu matematyka,zapisz,ChemiaIfizyka,Narzedzia;
 	JMenuItem srednia, potega,pierwiastek,dzielenie,Konwerter, notatnik,wynik,notatnikI,objetoscSzescianu,obliczMasê,obliczGêstoœæ,obliczObjêtoœæ;
 	JLabel sredniaLabel;
 	JTextArea NotatnikT;
+	public void init()
+	{
+		masa.put(2, 1000);
+		
+		dlugosc.put(2, 10);
+		dlugosc.put(3, 10);
+	}
 	public Main()
 	{
+		init();
+		
 		setSize(1000,1000);
 		setTitle("Test");
 		setLayout(null);
@@ -88,6 +101,8 @@ public class Main extends JFrame implements ActionListener
 	}
 	public static void main(String[] args)
 	{
+		
+		
 		Main main = new Main();
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main.setVisible(true);
@@ -184,6 +199,70 @@ public class Main extends JFrame implements ActionListener
 			sredniaLabel.setText("Wynik: "+wynik+" (g/cm3)");
 		}
 	}
+	public static int extractMasaToInt(String gestosc)
+	{
+		if(gestosc.charAt(0)=='g')
+		{
+			return 1;
+		}
+		else
+		{
+			return 2;
+		}
+	}
+	public static int extractDlugoscToInt(String gestosc)
+	{
+		char temp = gestosc.charAt(gestosc.length()-3);
+		switch(temp)
+		{
+		case 'c':
+			return 1;
+		case '/':
+			return 3;
+		case 'd':
+			return 2;
+		default:
+			return 0;
+		}
+		
+	}
+	public static double dlugosc(int teraz,int cel)
+	{
+		if(teraz<cel)
+		{
+			teraz++;
+			double temp =(double) 1/dlugosc.get(teraz);
+			BigDecimal ile = new BigDecimal(Double.toString(temp));
+			while(teraz<cel)
+			{
+				double temp1=(double)1/dlugosc.get(teraz);
+				BigDecimal bc = new BigDecimal(Double.toString(temp1));
+				teraz++;
+				ile = ile.multiply(bc);
+				
+			}
+			return ile.doubleValue();
+		}
+		else if(cel<teraz)
+		{
+			int ile;
+			ile=dlugosc.get(teraz);
+			while(cel<teraz)
+			{
+				teraz--;
+				ile*=dlugosc.get(teraz);
+			}
+			return ile;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	public static int masa(int teraz,int cel)
+	{
+		
+	}
 }
 class ObliczMase extends JDialog implements ActionListener
 {
@@ -197,7 +276,7 @@ class ObliczMase extends JDialog implements ActionListener
 		setSize(800,800);
 		setLayout(null);
 		setTitle("Oblicz masê");
-		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jb = new JButton("Oblicz");
 		
 		left = new JComboBox();
@@ -215,13 +294,15 @@ class ObliczMase extends JDialog implements ActionListener
 		left.setBounds(170,50,75,20);
 		left.addItem("kg/m3");
 		left.addItem("g/cm3");
+		left.addItem("g/dm3");
+		
 		
 		rightL.setBounds(255, 50, 70, 20);
 		rightT.setBounds(325,50,70,20);
 		right.setBounds(400,50,70,20);
 		right.addItem("m3");
 		right.addItem("cm3");
-		
+
 		add(left);
 		add(leftL);
 		add(leftT);
@@ -242,6 +323,7 @@ class ObliczMase extends JDialog implements ActionListener
 		{
 			String leftChoose = left.getSelectedItem().toString();
 			String rightChoose = right.getSelectedItem().toString();
+			System.out.println(Main.dlugosc(Main.extractDlugoscToInt(leftChoose), 3));
 			double leftText=0,rightText = 0;
 			try
 			{
