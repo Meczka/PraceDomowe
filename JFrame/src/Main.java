@@ -192,11 +192,8 @@ public class Main extends JFrame implements ActionListener
 		}
 		else if(z==obliczGêstoœæ)
 		{
-			float masa,objetosc;
-			masa=Float.parseFloat(JOptionPane.showInputDialog("Podaj masê(g)"));
-			objetosc=Float.parseFloat(JOptionPane.showInputDialog("Podaj objêtoœæ(cm3)"));
-			float wynik = masa/objetosc;
-			sredniaLabel.setText("Wynik: "+wynik+" (g/cm3)");
+			ObliczGestosc og = new ObliczGestosc();
+			og.setVisible(true);
 		}
 	}
 	public static int extractMasaToInt(String gestosc)
@@ -327,7 +324,7 @@ public class Main extends JFrame implements ActionListener
 class ObliczMase extends JDialog implements ActionListener
 {
 	private JComboBox left,right,output;
-	private JLabel leftL,rightL;
+	private JLabel leftL,rightL,WynikL;
 	private JTextArea leftT,rightT;
 	private JButton jb;
 	
@@ -349,6 +346,8 @@ class ObliczMase extends JDialog implements ActionListener
 		
 		output = new JComboBox();
 		
+		WynikL = new JLabel();
+		
 		jb.setBounds(200,100,70,20);
 		
 		leftL.setBounds(20,50,70,20);
@@ -358,6 +357,9 @@ class ObliczMase extends JDialog implements ActionListener
 		left.addItem("g/cm3");
 		left.addItem("g/dm3");
 		
+		WynikL.setBounds(20, 100, 70, 20);
+		WynikL.setText("Wynik w:");
+		
 		output.setBounds(100,100,70,20);
 		output.addItem("kg");
 		output.addItem("g");
@@ -365,8 +367,11 @@ class ObliczMase extends JDialog implements ActionListener
 		rightL.setBounds(255, 50, 70, 20);
 		rightT.setBounds(325,50,70,20);
 		right.setBounds(400,50,70,20);
-		right.addItem("m3");
 		right.addItem("cm3");
+		right.addItem("dm3");
+		right.addItem("m3");
+		
+		
 
 		add(left);
 		add(leftL);
@@ -377,7 +382,7 @@ class ObliczMase extends JDialog implements ActionListener
 		add(rightT);
 		add(output);
 		add(jb);
-		
+		add(WynikL);
 		jb.addActionListener(this);
 	}
 	
@@ -406,9 +411,6 @@ class ObliczMase extends JDialog implements ActionListener
 			a=powtemp.doubleValue();
 			b=Main.masa(Main.extractMasaToInt(leftChoose), Main.exportMasaToIntFromMasa(outputChoose));
 			double d = a/b;
-			System.out.println(a);
-			System.out.println(b);
-			System.out.println(d);
 			
 			
 			BigDecimal divideTemp = new BigDecimal(Double.toString(d));
