@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -75,7 +76,39 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		
+		BigDecimal masaText = null,objetoscText = null;
+		try
+		{
+			masaText = new BigDecimal(masaT.getText());
+			objetoscText = new BigDecimal(objetoscT.getText());
+		}catch(Exception e){}
+		
+		
+		String masaChoose = masaC.getSelectedItem().toString();
+		String objetoscChoose = objetoscC.getSelectedItem().toString();
+		String wynikChoose = wynikC.getSelectedItem().toString();
+		
+		double m,v;
+		
+		m = Main.masa(Main.exportMasaToIntFromMasa(masaChoose), Main.extractMasaToIntFromGestosc(wynikChoose));
+		v = Main.dlugosc(Main.extractDlugoscToIntFromObjetosc(objetoscChoose), Main.extractDlugoscToIntFromGestosc(wynikChoose));
+		BigDecimal powertemp = new BigDecimal(Double.toString(v));
+		powertemp=powertemp.pow(3);
+		v=powertemp.doubleValue();
+		
+		BigDecimal divideTemp = new BigDecimal(Double.toString(m));
+		masaText = masaText.divide(divideTemp);
+		BigDecimal divideTemp1 = new BigDecimal(Double.toString(v));
+		objetoscText = objetoscText.divide(divideTemp1);
+		
+		
+		
+		BigDecimal wynik  = masaText.divide(objetoscText);
+		System.out.println(wynik.doubleValue());
+		
+		
+		
 		
 	}
 

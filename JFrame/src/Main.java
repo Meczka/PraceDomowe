@@ -196,7 +196,7 @@ public class Main extends JFrame implements ActionListener
 			og.setVisible(true);
 		}
 	}
-	public static int extractMasaToInt(String gestosc)
+	public static int extractMasaToIntFromGestosc(String gestosc)
 	{
 		if(gestosc.charAt(0)=='g')
 		{
@@ -207,7 +207,7 @@ public class Main extends JFrame implements ActionListener
 			return 2;
 		}
 	}
-	public static int extractDlugoscToInt(String gestosc)
+	public static int extractDlugoscToIntFromGestosc(String gestosc)
 	{
 		char temp = gestosc.charAt(gestosc.length()-3);
 		switch(temp)
@@ -405,11 +405,11 @@ class ObliczMase extends JDialog implements ActionListener
 			double a,b;
 			
 			
-			a=Main.dlugosc(Main.extractDlugoscToInt(leftChoose), Main.extractDlugoscToIntFromObjetosc(rightChoose));
+			a=Main.dlugosc(Main.extractDlugoscToIntFromGestosc(leftChoose), Main.extractDlugoscToIntFromObjetosc(rightChoose));
 			BigDecimal powtemp = new BigDecimal(Double.toString(a));
 			powtemp=powtemp.pow(3);
 			a=powtemp.doubleValue();
-			b=Main.masa(Main.extractMasaToInt(leftChoose), Main.exportMasaToIntFromMasa(outputChoose));
+			b=Main.masa(Main.extractMasaToIntFromGestosc(leftChoose), Main.exportMasaToIntFromMasa(outputChoose));
 			double d = a/b;
 			
 			
