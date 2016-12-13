@@ -195,6 +195,11 @@ public class Main extends JFrame implements ActionListener
 			ObliczGestosc og = new ObliczGestosc();
 			og.setVisible(true);
 		}
+		else if(z==obliczObjêtoœæ)
+		{
+			ObliczObjetosc oo = new ObliczObjetosc();
+			oo.setVisible(true);
+		}
 	}
 	public static int extractMasaToIntFromGestosc(String gestosc)
 	{

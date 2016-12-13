@@ -21,7 +21,7 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		setTitle("Oblicz gestosc");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-	jb = new JButton("Oblicz");
+		jb = new JButton("Oblicz");
 		
 		masaC = new JComboBox();
 		masaT = new JTextArea();
