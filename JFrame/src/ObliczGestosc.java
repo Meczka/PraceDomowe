@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 
 
 public class ObliczGestosc extends JDialog implements ActionListener{
-	private JLabel masaL,objetoscL,wynikL;
+	private JLabel masaL,objetoscL,wynikL,koniecL;
 	private JComboBox masaC,objetoscC,wynikC;
 	private JTextArea masaT,objetoscT;
 	private JButton jb;
@@ -30,6 +30,11 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		objetoscC = new JComboBox();
 		objetoscT = new JTextArea();
 		objetoscL =  new JLabel("Objetoœæ:");
+		
+		koniecL = new JLabel("test");
+		
+		koniecL.setBounds(200,100,70,20);
+		koniecL.setText("test");
 		
 		wynikC = new JComboBox();
 		
@@ -69,6 +74,7 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		add(wynikC);
 		add(jb);
 		add(wynikL);
+		add(koniecL);
 		jb.addActionListener(this);
 
 		
