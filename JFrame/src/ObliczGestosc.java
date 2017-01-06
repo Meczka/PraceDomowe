@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 
 
 public class ObliczGestosc extends JDialog implements ActionListener{
-	private JLabel masaL,objetoscL,wynikL;
+	private JLabel masaL,objetoscL,wynikL,outputL;
 	private JComboBox masaC,objetoscC,wynikC;
 	private JTextArea masaT,objetoscT;
 	private JButton jb;
@@ -35,6 +35,8 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		
 		wynikL = new JLabel();
 		
+		outputL = new JLabel();
+		
 		jb.setBounds(200,100,70,20);
 		
 		masaL.setBounds(20,50,70,20);
@@ -45,6 +47,8 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		
 		wynikL.setBounds(20, 100, 70, 20);
 		wynikL.setText("Wynik w:");
+		
+		outputL.setBounds(20,150,150,20);
 		
 		wynikC.setBounds(100,100,70,20);
 		wynikC.addItem("g/cm3");
@@ -69,6 +73,7 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		add(wynikC);
 		add(jb);
 		add(wynikL);
+		add(outputL);
 		jb.addActionListener(this);
 
 		
@@ -105,8 +110,7 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		
 		
 		BigDecimal wynik  = masaText.divide(objetoscText);
-		System.out.println(wynik.doubleValue());
-		
+		outputL.setText("Wynik: "+wynik.doubleValue());
 		
 		
 		

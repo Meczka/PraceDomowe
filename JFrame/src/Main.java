@@ -25,8 +25,8 @@ public class Main extends JFrame implements ActionListener
 	private static HashMap<Integer,Integer> masa = new HashMap<Integer,Integer>();
 	private static HashMap<Integer,Integer> dlugosc = new HashMap<Integer,Integer>();
 	JMenuBar menuBar;
-	JMenu matematyka,zapisz,ChemiaIfizyka,Narzedzia;
-	JMenuItem srednia, potega,pierwiastek,dzielenie,Konwerter, notatnik,wynik,notatnikI,objetoscSzescianu,obliczMasê,obliczGêstoœæ,obliczObjêtoœæ;
+	JMenu matematyka,zapisz,ChemiaIfizyka;
+	JMenuItem srednia, potega,pierwiastek,dzielenie, notatnik,wynik,notatnikI,objetoscSzescianu,obliczMasê,obliczGêstoœæ,obliczObjêtoœæ;
 	JLabel sredniaLabel;
 	JTextArea NotatnikT;
 	public void init()
@@ -57,9 +57,7 @@ public class Main extends JFrame implements ActionListener
 		NotatnikT.setBounds(10,50,700,800);
 		notatnikI = new JMenuItem("Notatnik");
 		wynik = new JMenuItem("Wynik");
-		Konwerter = new JMenuItem("Konwerter");
 		zapisz = new JMenu("Zapisz");
-		Narzedzia = new JMenu("Narzedzia");
 		ChemiaIfizyka = new JMenu("Chemia i Fizyka");
 		obliczGêstoœæ = new JMenuItem("Oblicz Gêstoœæ");
 		obliczMasê = new JMenuItem("Oblicz Masê");
@@ -71,7 +69,6 @@ public class Main extends JFrame implements ActionListener
 		menuBar.add(matematyka);
 		menuBar.add(ChemiaIfizyka);
 		menuBar.add(zapisz);
-		menuBar.add(Narzedzia);
 		zapisz.add(wynik);
 		zapisz.add(notatnikI);
 		matematyka.add(srednia);
@@ -82,7 +79,6 @@ public class Main extends JFrame implements ActionListener
 		ChemiaIfizyka.add(obliczGêstoœæ);
 		ChemiaIfizyka.add(obliczMasê);
 		ChemiaIfizyka.add(obliczObjêtoœæ);
-		Narzedzia.add(Konwerter);
 		//matematyka.add(notatnik);
 		add(sredniaLabel);
 		add(NotatnikT);
@@ -97,7 +93,6 @@ public class Main extends JFrame implements ActionListener
 		obliczGêstoœæ.addActionListener(this);
 		obliczObjêtoœæ.addActionListener(this);
 		obliczMasê.addActionListener(this);
-		Konwerter.addActionListener(this);
 	}
 	public static void main(String[] args)
 	{
@@ -329,7 +324,7 @@ public class Main extends JFrame implements ActionListener
 class ObliczMase extends JDialog implements ActionListener
 {
 	private JComboBox left,right,output;
-	private JLabel leftL,rightL,WynikL;
+	private JLabel leftL,rightL,WynikL,outputL;
 	private JTextArea leftT,rightT;
 	private JButton jb;
 	
@@ -351,9 +346,13 @@ class ObliczMase extends JDialog implements ActionListener
 		
 		output = new JComboBox();
 		
-		WynikL = new JLabel();
+		WynikL = new JLabel("Wynik:");
+		outputL =  new JLabel();
+		
 		
 		jb.setBounds(200,100,70,20);
+		
+		outputL.setBounds(20,150,150,20);
 		
 		leftL.setBounds(20,50,70,20);
 		leftT.setBounds(95, 50, 70, 20);
@@ -363,7 +362,6 @@ class ObliczMase extends JDialog implements ActionListener
 		left.addItem("g/dm3");
 		
 		WynikL.setBounds(20, 100, 70, 20);
-		WynikL.setText("Wynik w:");
 		
 		output.setBounds(100,100,70,20);
 		output.addItem("kg");
@@ -388,6 +386,8 @@ class ObliczMase extends JDialog implements ActionListener
 		add(output);
 		add(jb);
 		add(WynikL);
+		
+		add(outputL);
 		jb.addActionListener(this);
 	}
 	
@@ -422,8 +422,7 @@ class ObliczMase extends JDialog implements ActionListener
 			leftText = leftText.divide(divideTemp);
 			
 			BigDecimal wynik = leftText.multiply(rightText);
-			System.out.println(wynik.doubleValue());
-			
+			outputL.setText("Wynik: " + wynik.doubleValue());
 			
 			
 			
