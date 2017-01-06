@@ -29,7 +29,7 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		
 		objetoscC = new JComboBox();
 		objetoscT = new JTextArea();
-		objetoscL =  new JLabel("Objetoœæ:");
+		objetoscL =  new JLabel("ObjetoÅ“Ã¦:");
 		
 		
 		wynikC = new JComboBox();
