@@ -30,7 +30,6 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		objetoscC = new JComboBox();
 		objetoscT = new JTextArea();
 		objetoscL =  new JLabel("Objetoœæ:");
-		objetoscL =  new JLabel("ObjetoÅ“Ã¦:");
 		
 		
 		wynikC = new JComboBox();
@@ -75,7 +74,12 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		add(wynikC);
 		add(jb);
 		add(wynikL);
+<<<<<<< HEAD
 		add(outputL);
+=======
+		add(outputL);
+
+>>>>>>> branch 'master' of https://github.com/Meczka/PraceDomowe.git
 		jb.addActionListener(this);
 
 		
