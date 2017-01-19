@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -324,7 +326,7 @@ public class Main extends JFrame implements ActionListener
 class ObliczMase extends JDialog implements ActionListener
 {
 	private JComboBox left,right,output;
-	private JLabel leftL,rightL,WynikL,outputL;
+	private JLabel leftL,rightL,WynikL,outputL,rozwiazanie;
 	private JTextArea leftT,rightT;
 	private JButton jb;
 	
@@ -348,11 +350,12 @@ class ObliczMase extends JDialog implements ActionListener
 		
 		WynikL = new JLabel("Wynik:");
 		outputL =  new JLabel();
-		
+		rozwiazanie = new JLabel();
 		
 		jb.setBounds(200,100,70,20);
 		
 		outputL.setBounds(20,150,150,20);
+		rozwiazanie.setBounds(20,200,150,150);
 		
 		leftL.setBounds(20,50,70,20);
 		leftT.setBounds(95, 50, 70, 20);
@@ -415,14 +418,18 @@ class ObliczMase extends JDialog implements ActionListener
 			powtemp=powtemp.pow(3);
 			a=powtemp.doubleValue();
 			b=Main.masa(Main.extractMasaToIntFromGestosc(leftChoose), Main.exportMasaToIntFromMasa(outputChoose));
-			double d = a/b;
-			
+			double d = b/a;
+			if(Main.extractDlugoscToIntFromGestosc(leftChoose)!= Main.extractDlugoscToIntFromObjetosc(rightChoose))
+			{
+				
+				System.out.println("1"+leftChoose+" = " +d +outputChoose+"/"+rightChoose);
+			}
 			
 			BigDecimal divideTemp = new BigDecimal(Double.toString(d));
-			leftText = leftText.divide(divideTemp);
+			leftText = leftText.multiply(divideTemp);
 			
 			BigDecimal wynik = leftText.multiply(rightText);
-			outputL.setText("Wynik: " + wynik.doubleValue());
+			outputL.setText("Wynik: " + wynik.toString());
 			
 			
 			
