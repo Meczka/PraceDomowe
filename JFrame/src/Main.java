@@ -410,14 +410,13 @@ class ObliczMase extends JDialog implements ActionListener
 			String outputChoose = output.getSelectedItem().toString();
 			//System.out.println(Main.dlugosc(Main.extractDlugoscToInt(leftChoose), 1));
 			//System.out.println(Main.masa(Main.extractMasaToInt(leftChoose), 2));
-			double a,b;
 			
 			
 			a=Main.dlugosc(Main.extractDlugoscToIntFromGestosc(leftChoose), Main.extractDlugoscToIntFromObjetosc(rightChoose));
 			BigDecimal powtemp = new BigDecimal(Double.toString(a));
 			powtemp=powtemp.pow(3);
-			a=powtemp.doubleValue();
-			b=Main.masa(Main.extractMasaToIntFromGestosc(leftChoose), Main.exportMasaToIntFromMasa(outputChoose));
+			powtemp.doubleValue();
+			BigDecimal b = new BigDecimal(Main.masa(Main.extractMasaToIntFromGestosc(leftChoose), Main.exportMasaToIntFromMasa(outputChoose)));
 			double d = b/a;
 			if(Main.extractDlugoscToIntFromGestosc(leftChoose)!= Main.extractDlugoscToIntFromObjetosc(rightChoose))
 			{
