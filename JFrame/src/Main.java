@@ -412,23 +412,25 @@ class ObliczMase extends JDialog implements ActionListener
 			//System.out.println(Main.masa(Main.extractMasaToInt(leftChoose), 2));
 			
 			
-			a=Main.dlugosc(Main.extractDlugoscToIntFromGestosc(leftChoose), Main.extractDlugoscToIntFromObjetosc(rightChoose));
-			BigDecimal powtemp = new BigDecimal(Double.toString(a));
-			powtemp=powtemp.pow(3);
-			powtemp.doubleValue();
-			BigDecimal b = new BigDecimal(Main.masa(Main.extractMasaToIntFromGestosc(leftChoose), Main.exportMasaToIntFromMasa(outputChoose)));
-			double d = b/a;
+			double a1 =(Main.dlugosc(Main.extractDlugoscToIntFromGestosc(leftChoose), Main.extractDlugoscToIntFromObjetosc(rightChoose)));
+			BigDecimal a = new BigDecimal(Double.toString(a1));
+			a = a.pow(3);
+			double b1 = (Main.masa(Main.extractMasaToIntFromGestosc(leftChoose), Main.exportMasaToIntFromMasa(outputChoose)));
+			BigDecimal b = new BigDecimal(Double.toString(b1));
+			System.out.println(a.toPlainString());
+			System.out.println(b.toPlainString());
+			BigDecimal d = b.divide(a);
 			if(Main.extractDlugoscToIntFromGestosc(leftChoose)!= Main.extractDlugoscToIntFromObjetosc(rightChoose))
 			{
 				
-				System.out.println("1"+leftChoose+" = " +d +outputChoose+"/"+rightChoose);
+				System.out.println("1"+leftChoose+" = " +d.toPlainString() +outputChoose+"/"+rightChoose);
 			}
 			
-			BigDecimal divideTemp = new BigDecimal(Double.toString(d));
+			BigDecimal divideTemp = d;
 			leftText = leftText.multiply(divideTemp);
 			
 			BigDecimal wynik = leftText.multiply(rightText);
-			outputL.setText("Wynik: " + wynik.toString());
+			outputL.setText("Wynik: " + wynik.toPlainString());
 			
 			
 			
