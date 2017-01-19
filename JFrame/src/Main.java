@@ -420,18 +420,19 @@ class ObliczMase extends JDialog implements ActionListener
 			System.out.println(a.toPlainString());
 			System.out.println(b.toPlainString());
 			BigDecimal d = b.divide(a);
-			if(Main.extractDlugoscToIntFromGestosc(leftChoose)!= Main.extractDlugoscToIntFromObjetosc(rightChoose))
-			{
-				
-				System.out.println("1"+leftChoose+" = " +d.toPlainString() +outputChoose+"/"+rightChoose);
-			}
+			
 			
 			BigDecimal divideTemp = d;
-			leftText = leftText.multiply(divideTemp);
+			BigDecimal temp = leftText.multiply(divideTemp);
 			
-			BigDecimal wynik = leftText.multiply(rightText);
+			BigDecimal wynik = temp.multiply(rightText);
 			outputL.setText("Wynik: " + wynik.toPlainString());
-			
+			if(Main.extractDlugoscToIntFromGestosc(leftChoose)!= Main.extractDlugoscToIntFromObjetosc(rightChoose))
+			{
+				System.out.println("1"+leftChoose+" = " +d.toPlainString() +outputChoose+"/"+rightChoose);
+				System.out.println(leftText.toPlainString() + "*" + d.toPlainString()+"="+temp.toPlainString());
+				System.out.println(temp.toPlainString()+"*"+rightText+"="+wynik.toPlainString());
+			}
 			
 			
 			//System.out.println("------------------------");
