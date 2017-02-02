@@ -106,12 +106,14 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		BigDecimal divideTemp = new BigDecimal(Double.toString(m));
 		masaText = masaText.divide(divideTemp);
 		
-		objetoscText = objetoscText.divide(powertemp);
+		BigDecimal temp = objetoscText.divide(powertemp);
 		
 		
 		
-		BigDecimal wynik  = masaText.divide(objetoscText);
+		BigDecimal wynik  = masaText.divide(temp);
 		outputL.setText("Wynik: "+wynik.doubleValue());
+		
+		//if(Main)
 		
 		
 		
