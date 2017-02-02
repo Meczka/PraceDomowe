@@ -101,12 +101,12 @@ public class ObliczGestosc extends JDialog implements ActionListener{
 		v = Main.dlugosc(Main.extractDlugoscToIntFromObjetosc(objetoscChoose), Main.extractDlugoscToIntFromGestosc(wynikChoose));
 		BigDecimal powertemp = new BigDecimal(Double.toString(v));
 		powertemp=powertemp.pow(3);
-		v=powertemp.doubleValue();
+		//v=powertemp.doubleValue();
 		
 		BigDecimal divideTemp = new BigDecimal(Double.toString(m));
 		masaText = masaText.divide(divideTemp);
-		BigDecimal divideTemp1 = new BigDecimal(Double.toString(v));
-		objetoscText = objetoscText.divide(divideTemp1);
+		
+		objetoscText = objetoscText.divide(powertemp);
 		
 		
 		
