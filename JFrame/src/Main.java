@@ -326,7 +326,7 @@ public class Main extends JFrame implements ActionListener
 class ObliczMase extends JDialog implements ActionListener
 {
 	private JComboBox left,right,output;
-	private JLabel leftL,rightL,WynikL,outputL,rozwiazanie;
+	private JLabel leftL,rightL,WynikL,outputL,rozwiazanie,rozwiazanie1,rozwiazanie2;
 	private JTextArea leftT,rightT;
 	private JButton jb;
 	
@@ -350,12 +350,19 @@ class ObliczMase extends JDialog implements ActionListener
 		
 		WynikL = new JLabel("Wynik:");
 		outputL =  new JLabel();
-		rozwiazanie = new JLabel();
+		
+		rozwiazanie = new JLabel("test");
+		rozwiazanie1 = new JLabel("test1");
+		rozwiazanie2 = new JLabel("test2");
 		
 		jb.setBounds(200,100,70,20);
 		
 		outputL.setBounds(20,150,150,20);
-		rozwiazanie.setBounds(20,200,150,150);
+		
+		
+		rozwiazanie.setBounds(20,150,150,170);
+		rozwiazanie1.setBounds(20,200,150,220);
+		rozwiazanie2.setBounds(20,230,150,250);
 		
 		leftL.setBounds(20,50,70,20);
 		leftT.setBounds(95, 50, 70, 20);
@@ -389,7 +396,9 @@ class ObliczMase extends JDialog implements ActionListener
 		add(output);
 		add(jb);
 		add(WynikL);
-		
+		add(rozwiazanie);
+		add(rozwiazanie1);
+		add(rozwiazanie2);
 		add(outputL);
 		jb.addActionListener(this);
 	}
@@ -430,8 +439,11 @@ class ObliczMase extends JDialog implements ActionListener
 			if(Main.extractDlugoscToIntFromGestosc(leftChoose)!= Main.extractDlugoscToIntFromObjetosc(rightChoose))
 			{
 				System.out.println("1"+leftChoose+" = " +d.toPlainString() +outputChoose+"/"+rightChoose);
+				rozwiazanie.setText("1"+leftChoose+" = " +d.toPlainString() +outputChoose+"/"+rightChoose);
 				System.out.println(leftText.toPlainString() + "*" + d.toPlainString()+"="+temp.toPlainString());
+				rozwiazanie1.setText(leftText.toPlainString() + "*" + d.toPlainString()+"="+temp.toPlainString());
 				System.out.println(temp.toPlainString()+"*"+rightText+"="+wynik.toPlainString());
+				rozwiazanie2.setText(temp.toPlainString()+"*"+rightText+"="+wynik.toPlainString());
 			}
 			
 			
